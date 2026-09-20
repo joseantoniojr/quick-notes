@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    /* Cores principais */
+    --brand-color: #8b90ff;
+
+    --brand-hover-color: #7a80f2;
+    --brand-active-color: #6b71e6;
+    --brand-light-color: #e8e9ff;
+
+    /* Backgrounds */
+    --base-color: #f2f4f8;
+    --surface-color: #ffffff;
+    --surface-hover-color: #f8f9fc;
+
+    /* Textos */
+    --text-color: #191b23;
+    --secondary-text-color: #3c404f;
+    --muted-text-color: #747887;
+    --placeholder-color: #9ca0ad;
+
+    /* Bordas */
+    --border-color: #e1e3e9;
+    --border-hover-color: #cdd0da;
+    --focus-color: #8b90ff;
+
+    /* Estados */
+    --favorite-color: #f5b800;
+    --favorite-background-color: #fff4cc;
+
+    --danger-color: #e05252;
+    --danger-hover-color: #d13f3f;
+    --danger-background-color: #fde8e8;
+
+    --success-color: #3ca66b;
+    --success-background-color: #e4f6ec;
+
+    /* Texto sobre cores */
+    --on-brand-color: #ffffff;
+
+    /* Transparências */
+    --overlay-color: rgba(0, 0, 0, 0.5);
+
+    /*  Tipografia */
+    --font-family: "Poppins", sans-serif;
+
+    --fs-xs: 1.2rem;
+    --fs-sm: 1.4rem;
+    --fs-md: 1.6rem;
+    --fs-lg: 1.8rem;
+    --fs-xl: 2.4rem;
+    --fs-2xl: 3.2rem;
+
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    --lh-tight: 1.2;
+    --lh-normal: 1.5;
+
+    /*  Espaçamentos */
+    --spacing-2xs: 0.4rem;
+    --spacing-xs: 0.8rem;
+    --spacing-sm: 1.2rem;
+    --spacing-md: 1.6rem;
+    --spacing-lg: 2.4rem;
+    --spacing-xl: 3.2rem;
+
+    /*  Bordas */
+    --border-width: 1px;
+    --border-width-thick: 2px;
+
+    /*  Border Radius */
+    --radius-sm: 0.4rem;
+    --radius-md: 0.8rem;
+    --radius-lg: 1.2rem;
+    --radius-xl: 1.6rem;
+    --radius-2xl: 2.4rem;
+    --radius-full: 9999px;
+
+    /*  Sombras */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    /*  Transições */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 300ms ease;
+
+    /*  Layout */
+    --container-max-width: 120rem;
+    --content-gap: 1rem;
+
+    /*  Ícones */
+    --icon-xs: 1.4rem;
+    --icon-sm: 1.6rem;
+    --icon-md: 2rem;
+    --icon-lg: 2.4rem;
+    --icon-xl: 3.2rem;
+
+}
+
+[data-theme="dark"] {
+    /* Cores principais */
+    --brand-color: #8b90ff;
+
+    --brand-hover-color: #9ba0ff;
+    --brand-active-color: #aeb2ff;
+    --brand-light-color: #30334a;
+
+    /* Backgrounds */
+    --base-color: #1e1f26;
+    --surface-color: #2c2f38;
+    --surface-hover-color: #353842;
+
+    /* Textos */
+    --text-color: #f0f0f0;
+    --secondary-text-color: #b0b3c0;
+    --muted-text-color: #858997;
+    --placeholder-color: #686c7a;
+
+    /* Bordas */
+    --border-color: #41444f;
+    --border-hover-color: #555966;
+    --focus-color: #8b90ff;
+
+    /* Estados */
+    --favorite-color: #ffc928;
+    --favorite-background-color: #3a321a;
+
+    --danger-color: #f06a6a;
+    --danger-hover-color: #ff7b7b;
+    --danger-background-color: #492929;
+
+    --success-color: #54bd83;
+    --success-background-color: #1f3b2c;
+
+    /* Texto sobre cores */
+    --on-brand-color: #ffffff;
+
+    /* Transparências */
+    --overlay-color: rgba(0, 0, 0, 0.7);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: var(--font-family);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-normal);
+
+    background-color: var(--base-color);
+    color: var(--text-color);
+
+    transition:
+        background-color var(--transition-normal),
+        color var(--transition-normal);
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+img,
+svg {
+    display: block;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+p {
+    line-height: 1.5;
+}
+
+input,
+textarea {
+    outline: none;
+}
