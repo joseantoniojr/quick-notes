@@ -3,7 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
     padding: var(--spacing-xl);
 }
 
@@ -11,7 +12,7 @@
     font-size: var(--fs-3xl);
     font-weight: var(--fw-bold);
     line-height: var(--lh-tight);
-
+    text-wrap: nowrap;
     color: var(--text-color);
 }
 
@@ -25,7 +26,7 @@
 .notes-list {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(32rem, 100%), 1fr));
     gap: var(--content-gap);
 
     padding: var(--spacing-sm) var(--spacing-xl);
@@ -40,6 +41,7 @@
 
 /* Note */
 .note {
+    min-width: 0;
     height: 45rem;
 
     display: flex;
@@ -83,6 +85,8 @@
     font-size: var(--fs-md);
     font-weight: var(--fw-light);
     color: var(--text-color);
+
+    overflow-wrap: break-word;
 }
 
 .note__footer {
@@ -233,6 +237,7 @@
     font-size: var(--fs-md);
     font-weight: var(--fw-medium);
     cursor: pointer;
+    text-wrap: nowrap;
     transition:
         background-color var(--transition-normal),
         color var(--transition-normal),
@@ -293,6 +298,12 @@
 
 .btn--favorite:hover {
     opacity: 0.7;
+}
+
+.btn--theme svg path,
+.btn--theme svg circle {
+    fill: var(--favorite-color);
+    stroke: var(--favorite-color);
 }
 
 .btn--note {
