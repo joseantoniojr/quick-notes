@@ -41,16 +41,18 @@
     /* Transparências */
     --overlay-color: rgba(0, 0, 0, 0.5);
 
-    /*  Tipografia */
+    /* Tipografia */
     --font-family: "Poppins", sans-serif;
 
-    --fs-xs: 1.2rem;
-    --fs-sm: 1.4rem;
-    --fs-md: 1.6rem;
-    --fs-lg: 1.8rem;
-    --fs-xl: 2.4rem;
-    --fs-2xl: 3.2rem;
+    --fs-xs: clamp(1.1rem, 1rem + 0.25vw, 1.2rem);
+    --fs-sm: clamp(1.3rem, 1.1rem + 0.3vw, 1.4rem);
+    --fs-md: clamp(1.4rem, 1.2rem + 0.4vw, 1.6rem);
+    --fs-lg: clamp(1.6rem, 1.3rem + 0.5vw, 1.8rem);
+    --fs-xl: clamp(2rem, 1.6rem + 0.7vw, 2.4rem);
+    --fs-2xl: clamp(2.4rem, 1.8rem + 1vw, 3.2rem);
+    --fs-3xl: clamp(2.8rem, 2rem + 1.5vw, 4rem);
 
+    --fw-light: 300;
     --fw-regular: 400;
     --fw-medium: 500;
     --fw-semibold: 600;
@@ -59,25 +61,29 @@
     --lh-tight: 1.2;
     --lh-normal: 1.5;
 
-    /*  Espaçamentos */
-    --spacing-2xs: 0.4rem;
-    --spacing-xs: 0.8rem;
-    --spacing-sm: 1.2rem;
-    --spacing-md: 1.6rem;
-    --spacing-lg: 2.4rem;
-    --spacing-xl: 3.2rem;
+    /* Espaçamentos */
+    --spacing-2xs: clamp(0.3rem, 0.2rem + 0.1vw, 0.4rem);
+    --spacing-xs: clamp(0.6rem, 0.4rem + 0.2vw, 0.8rem);
+    --spacing-sm: clamp(0.9rem, 0.6rem + 0.3vw, 1.2rem);
+    --spacing-md: clamp(1.2rem, 0.9rem + 0.4vw, 1.6rem);
+    --spacing-lg: clamp(1.8rem, 1.3rem + 0.6vw, 2.4rem);
+    --spacing-xl: clamp(2.4rem, 1.7rem + 0.8vw, 3.2rem);
 
-    /*  Bordas */
-    --border-width: 1px;
-    --border-width-thick: 2px;
+    /* Layout */
+    --container-max-width: 120rem;
+    --content-gap: clamp(0.8rem, 0.5rem + 0.5vw, 1.6rem);
 
-    /*  Border Radius */
+    /* Border Radius */
     --radius-sm: 0.4rem;
     --radius-md: 0.8rem;
     --radius-lg: 1.2rem;
     --radius-xl: 1.6rem;
     --radius-2xl: 2.4rem;
     --radius-full: 9999px;
+
+    /*  Bordas */
+    --border-width: 1px;
+    --border-width-thick: 2px;
 
     /*  Sombras */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -88,17 +94,12 @@
     --transition-normal: 250ms ease;
     --transition-slow: 300ms ease;
 
-    /*  Layout */
-    --container-max-width: 120rem;
-    --content-gap: 1rem;
-
     /*  Ícones */
     --icon-xs: 1.4rem;
     --icon-sm: 1.6rem;
     --icon-md: 2rem;
     --icon-lg: 2.4rem;
     --icon-xl: 3.2rem;
-
 }
 
 [data-theme="dark"] {
@@ -154,6 +155,8 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 
     font-family: var(--font-family);
@@ -204,11 +207,11 @@ ul {
 h1,
 h2,
 h3 {
-    line-height: 1.2;
+    line-height: var(--lh-tight);
 }
 
 p {
-    line-height: 1.5;
+    line-height: var(--lh-normal);
 }
 
 input,
