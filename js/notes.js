@@ -2,7 +2,19 @@ import { normalizaTexto, resposta } from "./helpers.js";
 import { salvaDados, buscaDados } from "./storage.js";
 
 function listaNotas() {
-	return buscaDados("notas");
+	const notas = buscaDados("notas");
+
+	const notasAtualizadas = notas.map((nota) => {
+		nota.criadoEm = new Date(nota.criadoEm);
+
+		if (nota.atualizadoEm) {
+			nota.atualizadoEm = new Date(nota.atualizadoEm);
+		}
+
+		return nota;
+	});
+
+	return notasAtualizadas;
 }
 
 function adicionaNota(titulo, conteudo) {
