@@ -2,7 +2,7 @@ function normalizaTexto(texto) {
 	return texto ? texto.trim().replace(/\s+g/, " ") : "";
 }
 
-function resposta(ok, dados = null) {
+function resposta(ok, message, dados = null) {
 	return { sucesso: ok, mensagem: message, dados };
 }
 
