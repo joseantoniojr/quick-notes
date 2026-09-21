@@ -5,7 +5,7 @@ function salvaDados(nome, dado) {
 function buscaDados(nome) {
 	const dados = localStorage.getItem(nome);
 
-	return dados ? JSON.parse(dados) : [];
+	return dados ? JSON.parse(dados) : null;
 }
 
 export { salvaDados, buscaDados };

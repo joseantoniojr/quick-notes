@@ -1,12 +1,13 @@
 function renderizaNaTela(notas) {
-	if (notas.length === 0) return renderizaEstadoVazio();
+	if (notas === null || notas.length === 0) return renderizaEstadoVazio();
 
 	return renderizaNotas(notas);
 }
 
 function renderizaNotas(notas) {
 	const container = document.getElementById("notes-container");
-	container.classList.add("note-list");
+	container.classList.remove("notes-list--empty");
+	container.classList.add("notes-list");
 	container.innerHTML = "";
 
 	notas.forEach((nota) => {
@@ -27,6 +28,7 @@ function renderizaNotas(notas) {
 		btnFavorite.type = "button";
 		btnFavorite.setAttribute("title", nota.favorita ? "Remover das favoritas" : "Favoritar");
 		btnFavorite.setAttribute("aria-label", nota.favorita ? "Desfavoritar nota" : "Favoritar");
+		btnFavorite.dataset.action = "favorite";
 		btnFavorite.dataset.noteId = nota.id;
 		btnFavorite.innerHTML = `
         <svg height="32" width="32" viewBox="0 0 24 24" fill="gold">
@@ -47,6 +49,7 @@ function renderizaNotas(notas) {
 		dateCreated.classList.add("note__date");
 
 		const date = nota.criadoEm;
+		dateCreated.setAttribute("datetime", date.toISOString());
 		dateCreated.textContent = date.toLocaleDateString("pt-BR", { year: "numeric", month: "short", day: "numeric" });
 
 		const actions = document.createElement("div");
@@ -57,6 +60,7 @@ function renderizaNotas(notas) {
 		edit.type = "button";
 		edit.setAttribute("title", "Editar Nota");
 		edit.setAttribute("aria-label", "Editar Nota");
+		edit.dataset.action = "edit";
 		edit.dataset.noteId = nota.id;
 		edit.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -68,6 +72,7 @@ function renderizaNotas(notas) {
 		del.type = "button";
 		del.setAttribute("title", "Excluir nota");
 		del.setAttribute("aria-label", "Excluir nota");
+		del.dataset.action = "delete";
 		del.dataset.noteId = nota.id;
 		del.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -88,6 +93,7 @@ function renderizaNotas(notas) {
 
 function renderizaEstadoVazio() {
 	const container = document.getElementById("notes-container");
+	container.classList.remove("notes-list");
 	container.classList.add("notes-list--empty");
 	container.innerHTML = `
         <section id="empty-state" class="empty-state">
@@ -100,8 +106,7 @@ function renderizaEstadoVazio() {
             <p class="empty-state__text">Você ainda não criou nenhuma nota</p>
 
             <button id="btn-empty-add-note" class="btn btn--primary" type="button" aria-label="Adicionar nota">
-                <i data-lucide="plus"></i>
-                <span>Adicionar Nota</span>
+                + Adicionar Nota
             </button>
         </section>
     `;

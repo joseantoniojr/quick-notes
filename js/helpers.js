@@ -1,5 +1,5 @@
 function normalizaTexto(texto) {
-	return texto ? texto.trim().replace(/\s+g/, " ") : "";
+	return texto ? texto.trim().replace(/\s+/g, " ") : "";
 }
 
 function resposta(ok, message, dados = null) {

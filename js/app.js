@@ -42,9 +42,11 @@ btnAddNote.addEventListener("click", () => {
 	noteModal.showModal();
 	titleModal.textContent = "Add Nova Nota";
 });
+
 btnCloseNote.addEventListener("click", () => noteModal.close());
 btnCancelNote.addEventListener("click", () => noteModal.close());
 
+noteModal.addEventListener("close", limpaEstado);
 noteModal.addEventListener("click", (e) => {
 	if (e.target === noteModal) {
 		noteModal.close();
@@ -55,20 +57,17 @@ btnSaveNote.addEventListener("click", (e) => {
 	e.preventDefault();
 
 	if (editingNoteId) {
-		editaNota(editingNoteId, title.value, content.value);
-		renderizaNaTela(listaNotas());
-		noteModal.close();
-		title.value = "";
-		content.value = "";
+		const editNote = editaNota(editingNoteId, title.value, content.value);
+		if (editNote.sucesso) {
+			atualizaLista();
+			noteModal.close();
+		}
 	} else {
-		editingNoteId = null;
 		const addNote = adicionaNota(title.value, content.value);
 
 		if (addNote.sucesso) {
-			renderizaNaTela(listaNotas());
+			atualizaLista();
 			noteModal.close();
-			title.value = "";
-			content.value = "";
 		}
 	}
 });
@@ -76,33 +75,35 @@ btnSaveNote.addEventListener("click", (e) => {
 // Events Note
 notesContainer.addEventListener("click", (e) => {
 	const btn = e.target.closest("button");
-	const id = Number(btn.dataset.noteId);
 
-	console.log(btn);
+	if (!btn) return;
 
 	if (btn.id === "btn-empty-add-note") {
 		noteModal.showModal();
+		titleModal.textContent = "Add Nova Nota";
 	}
 
-	if (btn.classList.contains("btn--favorite")) {
-		alteraStatusFavorita(id);
-		btn.classList.toggle("is-active");
+	const idNote = Number(btn.dataset.noteId);
+	const action = btn.dataset.action;
+
+	if (action === "favorite") {
+		alteraStatusFavorita(idNote);
+		atualizaLista();
 	}
 
-	if (btn.classList.contains("btn--edit")) {
-		const listNotes = listaNotas();
-		const note = listNotes.find((n) => n.id === id);
+	if (action === "edit") {
+		const note = listaNotas().find((n) => n.id === idNote);
 
 		noteModal.showModal();
 		titleModal.textContent = "Editar nota";
 
 		title.value = note.titulo;
 		content.value = note.conteudo;
-		editingNoteId = id;
+		editingNoteId = idNote;
 	}
 
-	if (btn.classList.contains("btn--delete")) {
-		deletingNoteId = id;
+	if (action === "delete") {
+		deletingNoteId = idNote;
 		confirmationModal.showModal();
 	}
 });
@@ -118,7 +119,7 @@ confirmationModal.addEventListener("click", (e) => {
 
 btnDeleteConfirmation.addEventListener("click", () => {
 	excluiNota(deletingNoteId);
-	renderizaNaTela(listaNotas());
+	atualizaLista();
 	confirmationModal.close();
 });
 
@@ -126,12 +127,22 @@ btnDeleteConfirmation.addEventListener("click", () => {
 btnFavorite.addEventListener("click", () => {
 	btnFavorite.classList.toggle("is-active");
 
+	atualizaLista();
+});
+
+function atualizaLista() {
 	if (btnFavorite.classList.contains("is-active")) {
 		renderizaNaTela(filtraNotasFavoritas());
 	} else {
 		renderizaNaTela(listaNotas());
 	}
-});
+}
+
+function limpaEstado() {
+	editingNoteId = null;
+	title.value = "";
+	content.value = "";
+}
 
 carregaTema();
-renderizaNaTela(listaNotas());
+atualizaLista();
