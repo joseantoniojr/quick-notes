@@ -2,7 +2,9 @@ import { normalizaTexto, resposta } from "./helpers.js";
 import { salvaDados, buscaDados } from "./storage.js";
 
 function listaNotas() {
-	const notas = buscaDados("notas");
+	let notas = buscaDados("notas");
+
+	if (!notas) notas = [];
 
 	const notasAtualizadas = notas.map((nota) => {
 		nota.criadoEm = new Date(nota.criadoEm);
@@ -18,13 +20,13 @@ function listaNotas() {
 }
 
 function adicionaNota(titulo, conteudo) {
-	const notas = listaNotas();
+	let notas = listaNotas();
 
 	titulo = normalizaTexto(titulo);
 	conteudo = normalizaTexto(conteudo);
 
-	if (titulo === "") return resposta(false, "O título da nota é obrigátorio");
-	if (conteudo === "") return resposta(false, "O conteudo da nota é obrigátorio");
+	if (titulo === "") return resposta(false, "O título da nota é obrigatório");
+	if (conteudo === "") return resposta(false, "O conteudo da nota é obrigatório");
 
 	const nota = {
 		id: Date.now(),
@@ -35,7 +37,7 @@ function adicionaNota(titulo, conteudo) {
 		atualizadoEm: null,
 	};
 
-	notas.push(nota);
+	notas.unshift(nota);
 
 	salvaDados("notas", notas);
 
@@ -51,8 +53,8 @@ function editaNota(idNota, titulo, conteudo) {
 	titulo = normalizaTexto(titulo);
 	conteudo = normalizaTexto(conteudo);
 
-	if (titulo === "") return resposta(false, "O título da nota é obrigátorio");
-	if (conteudo === "") return resposta(false, "O conteudo da nota é obrigátorio");
+	if (titulo === "") return resposta(false, "O título da nota é obrigatório");
+	if (conteudo === "") return resposta(false, "O conteudo da nota é obrigatório");
 
 	nota.titulo = titulo;
 	nota.conteudo = conteudo;
@@ -89,7 +91,7 @@ function alteraStatusFavorita(id) {
 }
 
 function filtraNotasFavoritas() {
-	const notas = listaNotas();
+	let notas = listaNotas();
 	const notasFavoritas = notas.filter((nota) => nota.favorita);
 	return notasFavoritas;
 }
